@@ -1,5 +1,8 @@
 \version "2.12.3"
 
+fingeringUp   = { \override Fingering.direction = #UP   }
+fingeringDown = { \override Fingering.direction = #DOWN }
+
 \header {
   mutopiatitle = "Première Arabesque"
   mutopiacomposer = "DebussyC"
@@ -20,22 +23,22 @@
 
 \paper {
   %{ comment out for mutopiaproject }
-  #(set-paper-size  "letter")
+  % #(set-paper-size  "letter")
   ragged-bottom = ##t
   % For 3 page layout:
-  #(layout-set-staff-size 15)
-  bottom-margin =12
+  % #(layout-set-staff-size 15)
+  % bottom-margin =12
   %annotate-spacing = ##t
   %{ %}
   between-system-padding = 0
   ragged-last-bottom = ##f
 }
-% Definitios to override page-breaking
+% Definitions to override page-breaking
 myLineBreak = {
-  \break
+%   \break
 }
 myBreakForFivePages = {
-  \pageBreak
+%  \pageBreak
 }
 myBreakForThreePages = {
 %  \pageBreak
@@ -67,28 +70,28 @@ ohn = {
 
 rhUpE = \relative c'' {
   \stemUp\tieUp\phrasingSlurUp
-  \tempo"Andantino con moto"
+  \tempo"Andantino con moto" 4 = 110
   \key e \major
   s1 | s1 |
 
-  r4 cs\(^\< fs cs\!~ |
-  cs4\) cs\(^\< fs a\!~ |
+  r4 cs\(^\< fs-5 cs\!~ |
+  cs4\) cs-3\(^\< fs-\finger "5--4" a-5\!~ |
   \stemNeutral\tieNeutral
-  a4 a2~a8*2/3 gs fs\) |
+  a4 a2-5~a8*2/3 gs-4 fs-3\) |
   \barNumberCheck#6
-  r4 \times2/3{e8\( fs cs} e8*2/3 b cs gs b fs |
-  gs8*2/3 e gs ds2 cs4 |
-  b8\) r e'8*2/3\( fs cs e b cs gs b fs |
-  gs8*2/3 e gs ds2 cs4\) |
-  \times2/3{b8( a b} cs4~cs8 e ds e cs4) gs'2( e4) |
-  \times2/3{ds8( cs ds} e4~e8 gs fs gs |
+  r4 \times2/3{e8-4\( fs-5 cs-2} e8*2/3-5 b-3 cs-4 gs-2 b-5 fs-3 |
+  gs8*2/3-4 e-2 gs-5 ds2-3 cs4-2 |
+  b8-1\) r e'8*2/3-4\( fs-5 cs-2 e-5 b-3 cs-4 gs-2 b-5 fs-3 |
+  gs8*2/3-4 e-2 gs-5 ds2-3 cs4-2\) |
+  \times2/3{b8-2( a-1 b-2} cs4-3~cs8 e-5 ds-4 e-5 | cs4-2) gs'2-5( e4-3) |
+  \times2/3{ds8-2( cs-1 ds-2} e4-3~e8 gs-5 fs-4 gs-5 |
   \barNumberCheck#13
-  e4) cs'2\( \times2/3{as8 cs as} |
-  gs4\) e'2\( \times2/3{cs8 e cs\)} |
-  gs'4.(fs8)  gs4.( fs8) |
-  gs4.( fs8) gs-- fs4-- gs8--|
+  e4-1) cs'2-4\( \times2/3{as8-2 cs-4 as-2} |
+  gs4-1\) e'2-4\( \times2/3{cs8-1 e-2 cs-1\)} |
+  gs'4.-4(fs8-3)  gs4.-4( fs8-3) |
+  gs4.-4( fs8-3) gs---4 fs4---3 gs8---4|
   \barNumberCheck#17
-  \stemUp a2\( gs |
+  \stemUp a2-5\( gs |
   fs2 e\) |\myBreakForFivePages
 
   \stemNeutral
@@ -118,11 +121,11 @@ rhUpE = \relative c'' {
 
 rhDownE = \relative c' {
   \stemDown\mergeDifferentlyHeadedOn\tieDown\slurDown
-  \ohn cs8*2/3\( s s \times3/3{cs' e fs} \times3/3{gs ds b} s s \ohn b,\)|
-  \ohn a8*2/3\( s s a' cs ds e b gs s s \ohn gs,\) |
+  \ohn cs8*2/3\( s s \times3/3{cs'-2 e-3 fs-4} \times3/3{gs-5 ds-3 b-2} s s \ohn b,\)|
+  \ohn a8*2/3\( s s a'-1 cs-3 ds-4 e-5 b-2 gs-1 s s \ohn gs,\) |
 
-  s4 cs'8*2/3 fs, a~a4 cs8*2/3 fs, a~|
-  a4 cs8*2/3 fs, a~a4 a'8*2/3 a, cs |
+  s4 cs'8*2/3-3 fs,-1 a-2~a4 cs8*2/3-3 fs,-1 a-2~|
+  a4 cs8*2/3 fs,-1 a-2~a4 a'8*2/3 a,-1 cs-2 |
   \override TextSpanner #'(bound-details left text) = "rit."
   s2 s4\startTextSpan s8*2/3 s s\stopTextSpan|
   \barNumberCheck#6
@@ -157,35 +160,36 @@ rhDownE = \relative c' {
 }
 
 lhUpE = {
+  \fingeringDown
   \dynamicUp\tieUp
   \key e \major
-  \times2/3{cs'8\p e' a'} s2 \times2/3{gs'8 ds' b} |
-  a8*2/3 cs' fs' s2 e'8*2/3 b gs |
+  \times2/3{cs'8-5\p e'-3 a'-1} s2 \times2/3{gs'8-1 ds'-2 b-4} |
+  a8*2/3-5 cs'-3 fs'-1 s2 e'8*2/3-1 b-2 gs-4 |
 
   \stemUp \clef bass
-  fs8*2/3_\( a cs'~cs'4*2/3\cu\ohn\lu a'8*2/3\) \cl
-  %{%} e8*2/3_\( a cs'~cs'4*2/3 \cu\ohn\lu a'8*2/3\) \cl |
-  ds8*2/3_\( a cs'~cs'4*2/3 \cu\ohn\lu a'8*2/3\) \cl
-  %{%} cs8*2/3_\( a e'~e'4*2/3 \cu\ohn\lu cs''8*2/3\) \cl |
+  fs8*2/3-5_\( a-3 cs'-1~cs'4*2/3\cu\ohn\lu a'8*2/3\) \cl
+  %{%} e8*2/3-5_\( a-2 cs'-1~cs'4*2/3 \cu\ohn\lu a'8*2/3\) \cl |
+  ds8*2/3-5_\( a-2 cs'-1~cs'4*2/3 \cu\ohn\lu a'8*2/3\) \cl
+  %{%} cs8*2/3-5_\( a-2 e'-1~e'4*2/3 \cu\ohn\lu cs''8*2/3\) \cl |
   \stemNeutral
-  b,8*2/3\(\< fs a \clef treble cs' ds' fs' a'cs'' ds''\! cs'' b' a'\)|
-  \clef bass e,8(\pp b, e gs b gs e b,) |
-  e,8( cs e gs cs' gs e b,) |
-  e,8( b, e gs b gs e b,) |
-  e,8( cs e gs cs' gs e b,) |
+  b,8*2/3-5\(\< fs-2 a-1 \clef treble cs'-4 ds'-3 fs'-2 a'-1 cs''-3 ds''-2\! cs''-3 b'-1 a'-2\)|
+  \clef bass e,8-5(\pp b,-2 e-1 gs-3 b-2 gs-3 e-1 b,-2) |
+  e,8-5( cs-2 e-1 gs-3 cs'-1 gs-3 e-1 b,-2) |
+  e,8-5( b,-2 e-1 gs-3 b-2 gs-3 e-1 b,-2) |
+  e,8-5( cs-2 e-1 gs-3 cs'-1 gs-3 e-1 b,-2) |
   \set crescendoText="poco a poco cresc."
   \set crescendoSpanner=#'text
-  fs,8(\< cs e fs a fs e cs)\! |
-  gs,8( cs e gs b gs e cs) |
-  a,8( e fs a cs' a fs e) |
+  fs,8-5(\< cs-2 e-1 fs-3 a-2 fs-3 e-1 cs-2)\! |
+  gs,8-5( cs-2 e-1 gs-3 b-2 gs-3 e-1 cs-2) |
+  a,8-4( e-1 fs-3 a-2 cs'-1 a-2 fs-3 e-1) |
   \barNumberCheck#13
   \set crescendoText="sempre cresc."
-  as,8(\< e gs cs')\! cs( fs as e') |
-  e8( as cs' gs') fs( cs' e' as')|
-  \clef treble as8( e' gs' cs'') cs'( fs' as' e'') |
-  as8( e' gs' cs'') cs'( fs' as' e'') |
+  as,8-5(\< e-3 gs-2 cs'-1)\! cs-5( fs-3 as-2 e'-1) |
+  e8-5( as-3 cs'-2 gs'-1) fs-5( cs'-3 e'-2 as'-1)|
+  \clef treble as8-5( e'-3 gs'-2 cs''-1) cs'-5( fs'-3 as'-2 e''-1) |
+  as8-5( e'-3 gs'-2 cs''-1) cs'-5( fs'-3 as'-2 e''-1) |
   \barNumberCheck#17
-  \times2/3{cs'8\(\p e' a'} s2 gs'8*2/3 ds' b\) |
+  \times2/3{cs'8-5\(\p e'-3 a'-1} s2 gs'8*2/3 ds' b\) |
   a8*2/3\( cs' fs' s2 e'8*2/3 b gs\) |
 
   fss8*2/3( cs' ds' as' ds' cs') gs( cs' e' b' e' cs') |
